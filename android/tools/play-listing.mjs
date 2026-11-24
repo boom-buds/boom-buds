@@ -5,7 +5,9 @@
 //   node play-listing.mjs listing <store-listing.md> [screenshots dir] [--dry]
 //       the en-US listing's short and full descriptions from store-listing.md (its "Short description" and "Full
 //       description" sections) and, with a directory, the Android TV screenshots replaced by its PNGs in name order;
-//       one edit, committed (--dry: checked, then thrown away)
+//       one edit, committed (--dry: checked, then thrown away). The store page's website link (contact details)
+//       comes from the "Website" row of the file's table. The privacy policy address is not in the API: Play
+//       Console, Policy > App content > Privacy policy.
 // Review status is not part of the API: Play Console shows it.
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -86,11 +88,14 @@ if (command === 'tracks') {
   const fullDescription = section('Full description', 'Release notes');
   if (shortDescription.length > 80) throw new Error(`the short description has ${shortDescription.length} characters (80 at most)`);
   if (fullDescription.length > 4000) throw new Error(`the full description has ${fullDescription.length} characters (4000 at most)`);
+  const contactWebsite = md.match(/^\| Website \| (https:\/\/\S+) \|$/m)?.[1];
+  if (!contactWebsite) throw new Error(`no "Website" row in ${listingFile}`);
   const shots = shotsDir ? readdirSync(shotsDir).filter((f) => f.endsWith('.png')).sort() : [];
   console.log(`short description (${shortDescription.length}): ${shortDescription}`);
-  console.log(`full description: ${fullDescription.length} characters; TV screenshots: ${shots.join(', ') || 'unchanged'}`);
+  console.log(`full description: ${fullDescription.length} characters; website: ${contactWebsite}; TV screenshots: ${shots.join(', ') || 'unchanged'}`);
   const committed = await inEdit(async (id) => {
     await call('PATCH', `${base}/edits/${id}/listings/${LANGUAGE}`, { shortDescription, fullDescription });
+    await call('PATCH', `${base}/edits/${id}/details`, { contactWebsite });
     if (!shots.length) return;
     await call('DELETE', `${base}/edits/${id}/listings/${LANGUAGE}/tvScreenshots`);
     for (const f of shots) {
