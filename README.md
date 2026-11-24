@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://mayerwin.github.io/Boom-Buds/"><b>▶&nbsp;Play now</b></a>
+  <a href="https://boom-buds.github.io/"><b>▶&nbsp;Play now</b></a>
   &nbsp;·&nbsp;
   <a href="#ways-to-play">Ways to play</a>
   &nbsp;·&nbsp;
@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/mayerwin/Boom-Buds/actions/workflows/pages.yml"><img src="https://github.com/mayerwin/Boom-Buds/actions/workflows/pages.yml/badge.svg" alt="Build and deploy"></a>
+  <a href="https://github.com/boom-buds/boom-buds/actions/workflows/pages.yml"><img src="https://github.com/boom-buds/boom-buds/actions/workflows/pages.yml/badge.svg" alt="Build and deploy"></a>
 </p>
 
 ---
@@ -53,7 +53,7 @@ gamepads and touch controls, online play without a server, and computer players 
   and grabbing bombs, trigger and jelly bombs, diseases, the walls closing in at the end of a round, schemes,
   teams and the Gold Bud roulette. The hidden campaign and level editor are there too.
 - **1997 mode** brings back the original menus pixel for pixel, its hidden mouse, its waits between
-  rounds and the Hockey Rink's slippery ice (fast-forward stays), for one visit: the *1997 mode* link on the main screen, or [`?1997`](https://mayerwin.github.io/Boom-Buds/?1997)
+  rounds and the Hockey Rink's slippery ice (fast-forward stays), for one visit: the *1997 mode* link on the main screen, or [`?1997`](https://boom-buds.github.io/?1997)
   in the address (handy to share). Options can keep any of those habits for good.
 - **Fast:** a WebGL2 8-bit renderer and a fixed 60 Hz simulation. Ten top-level computer players run at the
   display's full refresh rate on a tenth of one CPU core.
@@ -62,7 +62,7 @@ gamepads and touch controls, online play without a server, and computer players 
 
 | | Where | How to start | Controls |
 |---|---|---|---|
-| 💻 | **Computer**<br>Windows, macOS, Linux, ChromeOS | Open **[mayerwin.github.io/Boom-Buds](https://mayerwin.github.io/Boom-Buds/)** in Chrome, Edge, Firefox or Safari | Keyboard (up to four players), mouse, USB or Bluetooth gamepads (two players each) |
+| 💻 | **Computer**<br>Windows, macOS, Linux, ChromeOS | Open **[boom-buds.github.io](https://boom-buds.github.io/)** in Chrome, Edge, Firefox or Safari | Keyboard (up to four players), mouse, USB or Bluetooth gamepads (two players each) |
 | 📱 | **Phone or tablet**<br>Android, iPhone, iPad | Open the same address and hold the device sideways. *Add to Home screen* gives it an icon and the full screen | Touch (two players per device), Bluetooth gamepads or keyboard |
 | 📺 | **TV**<br>Android TV, Google TV | The Boom Buds app, in a free beta on Google Play: [three steps](#play-on-a-tv) | TV remote, Bluetooth gamepads (two players each), keyboard, mouse |
 | 🏠 | **Your own computer, offline**<br>LAN parties | [`Launch.bat` or `npm start`](#run-it-on-your-computer): the phones, tablets and computers of your network play from it, even without internet | All of the above |
@@ -87,7 +87,7 @@ and sound effects in time with the picture. A Bluetooth or USB keyboard and a mo
 No developer options, no sideloading. Google can take a few hours to let a new tester in, and the beta opens
 once Google has approved its first release (submitted in October 2026). Google Play only accepts testers it knows,
 which is why there are two steps; to invite someone, send the group's page: it links every app of the beta.
-[Report a problem](https://github.com/mayerwin/Boom-Buds/issues).
+[Report a problem](https://github.com/boom-buds/boom-buds/issues).
 
 | On the TV | Move | Bomb | Special | Pause |
 |---|---|---|---|---|
@@ -111,8 +111,8 @@ between rounds it asks whether to leave the match. Back on the main screen leave
 ### Windows
 
 1. Install [Node.js](https://nodejs.org) 22.18 or newer (the LTS version is fine).
-2. Get this repository: [download the ZIP](https://github.com/mayerwin/Boom-Buds/archive/refs/heads/main.zip)
-   and unzip it, or `git clone https://github.com/mayerwin/Boom-Buds.git`.
+2. Get this repository: [download the ZIP](https://github.com/boom-buds/boom-buds/archive/refs/heads/main.zip)
+   and unzip it, or `git clone https://github.com/boom-buds/boom-buds.git`.
 3. Double-click **`Launch.bat`**.
 
 The first launch installs what the game needs and builds it, which takes a minute or two. Later launches start in
@@ -280,8 +280,12 @@ npm run assets -- --src "C:/Games/BOMBERMAN"
 
 ### Releases
 
-Every push to `main` runs the type check and the unit tests, builds the game and publishes it on GitHub Pages
-([workflow](.github/workflows/pages.yml)). Every file the game loads has a content hash in its name or URL, and a
+Every push to `main` runs the type check and the unit tests, builds the game and publishes it at
+[boom-buds.github.io](https://boom-buds.github.io/) ([workflow](.github/workflows/pages.yml)): the build is pushed to the
+[`boom-buds.github.io`](https://github.com/boom-buds/boom-buds.github.io) repository, which GitHub Pages serves at the root
+of the organization's address. That push uses the `WEBSITE_DEPLOY_TOKEN` secret, a fine-grained token that can write to
+that repository only (it expires on 2027-11-24; renew it before then). The old address, mayerwin.github.io/Boom-Buds,
+redirects there and brings the player's settings and edited levels along. Every file the game loads has a content hash in its name or URL, and a
 running game compares its build with the `version.json` of the site. Players get a new release the next time
 they open the game, or from the main menu if it is already open.
 

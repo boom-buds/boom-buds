@@ -31,7 +31,7 @@ The same answers as Pong Wars Reloaded:
 
 | Declaration | Answer |
 | --- | --- |
-| Privacy policy | https://mayerwin.github.io/Boom-Buds/privacy.html |
+| Privacy policy | https://boom-buds.github.io/privacy.html |
 | Ads | No |
 | Advertising ID | No |
 | App access | All functionality available without special access |

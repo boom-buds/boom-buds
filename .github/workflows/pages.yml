@@ -1,12 +1,16 @@
-# Checks, builds and publishes the game on GitHub Pages at every push to main (Settings -> Pages -> Source:
-# GitHub Actions). The game data (public/data) is in the repository: it is made from the original game with
-# `npm run assets`. Every file of a build has content-hashed URLs and the build id is in version.json, so
-# players get a new release at once (tools/build/versioning.ts, src/app/update.ts).
+# Checks and builds the game at every push to main, then publishes it at https://boom-buds.github.io/ by pushing the
+# build to the boom-buds/boom-buds.github.io repository (GitHub serves an organization's root address only from a
+# repository of that name; this one keeps the source). The push uses the WEBSITE_DEPLOY_TOKEN secret: a fine-grained
+# personal access token, resource owner boom-buds, repository boom-buds.github.io only, Contents read and write
+# (created 2026-11-23, expires 2027-11-24: make a new one the same way and replace the secret before then).
+# The game data (public/data) is in the repository: it is made from the original game with `npm run assets`. Every
+# file of a build has content-hashed URLs and the build id is in version.json, so players get a new release at once
+# (tools/build/versioning.ts, src/app/update.ts).
 # TURN relay for players whose networks block direct connections: the repository variable TURN_API, a credentials
 # API URL (Metered's /api/v1/turn/credentials?apiKey=...; it ends up in the published game, as any browser-side
 # TURN credential does), or fixed relays: repository variables TURN_URLS (comma separated) and TURN_USERNAME,
 # secret TURN_CREDENTIAL.
-name: Deploy to GitHub Pages
+name: Deploy to boom-buds.github.io
 
 on:
   push:
@@ -17,15 +21,13 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -42,15 +44,19 @@ jobs:
           VITE_TURN_URLS: ${{ vars.TURN_URLS }}
           VITE_TURN_USERNAME: ${{ vars.TURN_USERNAME }}
           VITE_TURN_CREDENTIAL: ${{ secrets.TURN_CREDENTIAL }}
-      - uses: actions/upload-pages-artifact@v5
+      - name: Site files
+        run: |
+          cp tools/site/404.html dist/404.html
+          touch dist/.nojekyll
+      - name: Publish to boom-buds.github.io
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v5
+          personal_token: ${{ secrets.WEBSITE_DEPLOY_TOKEN }}
+          external_repository: boom-buds/boom-buds.github.io
+          publish_branch: main
+          publish_dir: ./dist
+          # the website repository is a build output: one commit per release, no history to merge
+          force_orphan: true
+          user_name: 'boom-buds-bot'
+          user_email: 'bot@users.noreply.github.com'
+          commit_message: 'Release boom-buds/boom-buds@${{ github.sha }}'

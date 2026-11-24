@@ -75,7 +75,7 @@ The signing keys are in `publishing/secrets/` (ignored by git): **keep a backup 
 their passwords, the version-code counter). The listing texts are in
 [`publishing/store-listing.md`](publishing/store-listing.md), the app content answers in
 [`publishing/data-safety.md`](publishing/data-safety.md), the privacy policy is
-`https://mayerwin.github.io/Boom-Buds/privacy.html` (from `public/privacy.html`, also shown in the app).
+`https://boom-buds.github.io/privacy.html` (from `public/privacy.html`, also shown in the app).
 
 Testers join the group once, then opt in to each app at its testing link and install from Play on the TV.
 Production access for a personal account needs 12 testers opted in for 14 days in a row.

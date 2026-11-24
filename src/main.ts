@@ -3,6 +3,10 @@ import { Game } from './app/Game.ts';
 import { setupOrientationOverlay } from './engine/mobile.ts';
 import artUrl from './menu/art/home-bg.webp';
 import { watchForUpdates } from './app/update.ts';
+import { importFromOldSite } from './app/originMove.ts';
+
+// settings and schemes carried over from the game's old address, before anything reads them
+importFromOldSite();
 
 async function boot(): Promise<void> {
   // a page served from the browser's cache right after a release reloads before anything else

@@ -12,8 +12,8 @@ source, sent with the Android Publisher API (edits.listings), so that Play says 
 | Free or paid | Free (no ads, no purchases) |
 | Form factor | Android TV (opt in under Setup > Advanced settings > Form factors) |
 | Package | `com.github.boombuds` |
-| Privacy policy | https://mayerwin.github.io/Boom-Buds/privacy.html |
-| Website | https://mayerwin.github.io/Boom-Buds/ |
+| Privacy policy | https://boom-buds.github.io/privacy.html |
+| Website | https://boom-buds.github.io/ |
 | Contact email | the account's support address, as for the other apps |
 
 ## Short description (80 characters at most)

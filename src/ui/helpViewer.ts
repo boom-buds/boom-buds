@@ -51,7 +51,7 @@ function splitImages(line: string): Segment[] {
 }
 
 /** Where Boom Buds lives (shown, and clickable, in the credits). */
-export const REPO_URL = 'https://github.com/mayerwin/Boom-Buds';
+export const REPO_URL = 'https://github.com/boom-buds/boom-buds';
 
 /**
  * The credits open with the people behind Boom Buds; the rest of the file is the original's credits, now
