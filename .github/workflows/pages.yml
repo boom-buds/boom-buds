@@ -2,7 +2,7 @@
 # build to the boom-buds/boom-buds.github.io repository (GitHub serves an organization's root address only from a
 # repository of that name; this one keeps the source). The push uses the WEBSITE_DEPLOY_TOKEN secret: a fine-grained
 # personal access token, resource owner boom-buds, repository boom-buds.github.io only, Contents read and write
-# (created 2026-11-23, expires 2027-11-24: make a new one the same way and replace the secret before then).
+# (created 2026-11-23, no expiration; the org allows that since the same day).
 # The game data (public/data) is in the repository: it is made from the original game with `npm run assets`. Every
 # file of a build has content-hashed URLs and the build id is in version.json, so players get a new release at once
 # (tools/build/versioning.ts, src/app/update.ts).

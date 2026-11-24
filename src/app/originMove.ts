@@ -1,5 +1,5 @@
 // The game moved from mayerwin.github.io/Boom-Buds/ to boom-buds.github.io on 2026-11-23. Browsers keep saved data per
-// site, so the redirect page left at the old address (repository mayerwin/mayerwin.github.io, Boom-Buds/index.html)
+// site, so the old address (its 404.html in repository mayerwin/mayerwin.github.io)
 // reads the player's settings and level-editor schemes there and hands them over in the address fragment:
 // #bb-move=<base64url of a JSON object { localStorage key: value }>. The fragment never reaches a server.
 // Keys already present here are kept (they are newer than the old site's), and the fragment is then removed.

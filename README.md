@@ -284,7 +284,7 @@ Every push to `main` runs the type check and the unit tests, builds the game and
 [boom-buds.github.io](https://boom-buds.github.io/) ([workflow](.github/workflows/pages.yml)): the build is pushed to the
 [`boom-buds.github.io`](https://github.com/boom-buds/boom-buds.github.io) repository, which GitHub Pages serves at the root
 of the organization's address. That push uses the `WEBSITE_DEPLOY_TOKEN` secret, a fine-grained token that can write to
-that repository only (it expires on 2027-11-24; renew it before then). The old address, mayerwin.github.io/Boom-Buds,
+that repository only (no expiration). The old address, mayerwin.github.io/Boom-Buds,
 redirects there and brings the player's settings and edited levels along. Every file the game loads has a content hash in its name or URL, and a
 running game compares its build with the `version.json` of the site. Players get a new release the next time
 they open the game, or from the main menu if it is already open.
