@@ -48,6 +48,21 @@ jobs:
         run: |
           cp tools/site/404.html dist/404.html
           touch dist/.nojekyll
+      - name: Inject analytics script
+        if: vars.TIDESIGHT_URL != '' && vars.TIDESIGHT_SITE_ID != ''
+        env:
+          ANALYTICS_URL: ${{ vars.TIDESIGHT_URL }}
+          ANALYTICS_SITE: ${{ vars.TIDESIGHT_SITE_ID }}
+        run: |
+          python3 -c '
+          import os, pathlib
+          url, site = os.environ["ANALYTICS_URL"], os.environ["ANALYTICS_SITE"]
+          tag = f"  <script async src=\"{url}\" data-site=\"{site}\"></script>\n"
+          p = pathlib.Path("dist/index.html")
+          html = p.read_text(encoding="utf-8")
+          if url not in html:
+              p.write_text(html.replace("</head>", tag + "</head>", 1), encoding="utf-8")
+          '
       - name: Publish to boom-buds.github.io
         uses: peaceiris/actions-gh-pages@v4
         with:
